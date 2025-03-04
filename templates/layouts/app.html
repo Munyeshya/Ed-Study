@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Instructor Settings</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/favicon.svg">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/vendor/fontawesome-pro.css">
+    <link rel="stylesheet" href="assets/css/plugins/nouislider.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/icomoon.css">
+    <link rel="stylesheet" href="assets/css/vendor/spacing.css">
+    <link rel="stylesheet" href="assets/css/plugins/apexcharts.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <!-- Include Header -->
+    {% include 'inc/header.html' %}
+    
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        <!-- Content will be injected here -->
+        {% endblock %}
+    </main>
+    
+    <!-- Include Footer -->
+    {% include 'inc/footer.html' %}
+</body>
+</html>
