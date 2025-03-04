@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo/favicon.svg' %}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@icofont/icofont/css/icofont.min.css">
     <!-- CSS here -->
     <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/vendor/animate.min.css' %}">
@@ -24,28 +24,29 @@
 </head>
 
 <body>
-        <!-- preloader start -->
-        <div id="loading">
-            <div id="loading-center">
-                <div id="loading-center-absolute">
-                    <div class="bd-preloader-content">
-                        <div class="bd-preloader-logo">
-                            <div class="bd-preloader-circle">
-                                <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle stroke="#F5F5F5" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
-                                    </circle>
-                                    <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
-                                    </circle>
-                                </svg>
-                            </div>
-                            <img src="assets/images/logo/preloader-icon.png" alt="">
+    <!-- preloader start -->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="bd-preloader-content">
+                    <div class="bd-preloader-logo">
+                        <div class="bd-preloader-circle">
+                            <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle stroke="#F5F5F5" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                                </circle>
+                                <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                                </circle>
+                            </svg>
                         </div>
-                        <p class="bd-preloader-subtitle">Loading...</p>
+                        <img src="{% static 'images/logo/preloader-icon.png' %}" alt="Preloader Icon">
                     </div>
+                    <p class="bd-preloader-subtitle">Loading...</p>
                 </div>
             </div>
         </div>
-        <!-- preloader end -->
+    </div>
+<!-- preloader end -->
+
     <!-- Include Header -->
     {% include 'inc/header.html' %}
     
