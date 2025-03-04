@@ -1,81 +1,74 @@
 {% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Instructor Settings</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo/favicon.svg' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@icofont/icofont/css/icofont.min.css">
-    <!-- CSS here -->
-    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/vendor/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/plugins/swiper.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/vendor/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'css/vendor/fontawesome-pro.css' %}">
-    <link rel="stylesheet" href="{% static 'css/plugins/nouislider.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/vendor/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/vendor/spacing.css' %}">
-    <link rel="stylesheet" href="{% static 'css/plugins/apexcharts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <title>Kigali Nanny Agency</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <meta name="msapplication-TileColor" content="#FEFEFE"/>
+        <meta name="template-color" content="#FEFEFE"/>
+        <meta name="description" content="Kigali Nanny Agency"/>
+        <meta name="keywords" content="Kigali Nanny Agency"/>
+        <meta name="author" content=""/>
+        <link rel="shortcut icon" type="image/x-icon" href="img/logo/logo-gray.png"/>
+        <link href="{% static 'css/main.css' %}" rel="stylesheet"/>
 
-<body>
-    <!-- preloader start -->
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="bd-preloader-content">
-                    <div class="bd-preloader-logo">
-                        <div class="bd-preloader-circle">
-                            <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle stroke="#F5F5F5" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
-                                </circle>
-                                <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
-                                </circle>
-                            </svg>
-                        </div>
-                        <img src="{% static 'images/logo/preloader-icon.png' %}" alt="Preloader Icon">
-                    </div>
-                    <p class="bd-preloader-subtitle">Loading...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- preloader end -->
+        <!-- Toastr CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 
-    <!-- Include Header -->
-    {% include 'inc/header.html' %}
-    
-    <!-- Main Content -->
-    <main>
-        {% block content %}
-        <!-- Content will be injected here -->
-        {% endblock %}
-    </main>
+    </head>
+    <body>
 
-    <!-- Include Footer -->
-    {% include 'inc/footer.html' %}
+        {% include 'inc/header.html' %}
 
-    <!-- JS here -->
-    <script src="{% static 'js/vendor/jquery-3.7.1.min.js' %}"></script>
-    <script src="{% static 'js/plugins/waypoints.min.js' %}"></script>
-    <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/plugins/swiper.min.js' %}"></script>
-    <script src="{% static 'js/plugins/wow.js' %}"></script>
-    <script src="{% static 'js/vendor/magnific-popup.min.js' %}"></script>
-    <script src="{% static 'js/vendor/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
-    <script src="{% static 'js/plugins/nice-select.min.js' %}"></script>
-    <script src="{% static 'js/vendor/ajax-form.js' %}"></script>
-    <script src="{% static 'js/plugins/easypie.js' %}"></script>
-    <script src="{% static 'js/vendor/purecounter.js' %}"></script>
-    <script src="{% static 'js/plugins/nouislider.min.js' %}"></script>
-    <script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
-    <script src="{% static 'js/plugins/typed.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
+        <main class="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'inc/footer.html' %}
+
+        <script src="{% static 'js/vendor/jquery-3.7.1.min.js' %}"></script>
+        <script src="{% static 'js/vendor/jquery-migrate-3.3.0.min.js' %}"></script>
+        <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/plugins/magnific-popup.js' %}"></script>
+        <script src="{% static 'js/plugins/perfect-scrollbar.min.js' %}"></script>
+        <script src="{% static 'js/plugins/swiper-bundle.min.js' %}"></script>
+        <script src="{% static 'js/plugins/slick.js' %}"></script>
+        <script src="{% static 'js/plugins/jquery.carouselTicker.js' %}"></script>
+        <script src="{% static 'js/plugins/masonry.min.js' %}"></script>
+        <script src="{% static 'js/plugins/scrollup.js' %}"></script>
+        <script src="{% static 'js/plugins/wow.js' %}"></script>
+        <script src="{% static 'js/plugins/waypoints.js' %}"></script>
+        <script src="{% static 'js/plugins/jquery.appear.js' %}"></script>
+        <script src="{% static 'js/plugins/jquery.odometer.min.js' %}"></script>
+        <script src="{% static 'js/plugins/bootstrap-datepicker.js' %}"></script>
+        <script src="{% static 'js/plugins/dark.js' %}"></script>
+        <script src="{% static 'js/vendor/jquery.countdown.min.js' %}"></script>
+        <script src="{% static 'js/plugins/noUISlider.js' %}"></script>
+        <script src="{% static 'js/plugins/slider.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Toastr JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <!-- Toastr Notification Script -->
+        <script>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        toastr.success("{{ message }}");
+                    {% elif message.tags == 'error' %}
+                        toastr.error("{{ message }}");
+                    {% elif message.tags == 'warning' %}
+                        toastr.warning("{{ message }}");
+                    {% elif message.tags == 'info' %}
+                        toastr.info("{{ message }}");
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </script>
+
+    </body>
 </html>

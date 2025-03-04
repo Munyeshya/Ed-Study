@@ -1,8 +1,13 @@
+from base.views import *
 from django.urls import path
-from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
-app_name = 'base'  # Namespacing URLs for the app
+app_name = 'base'
 
 urlpatterns = [
-    path('', views.index, name='index'),  # Map index view
+    path('', home, name="home"),
+    path('about', about, name="about"),
+    path('services', services, name="services"),
+    path('contact', contact, name="contact"),
 ]
