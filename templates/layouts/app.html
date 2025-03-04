@@ -7,20 +7,45 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo/favicon.svg' %}">
+
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/vendor/fontawesome-pro.css">
-    <link rel="stylesheet" href="assets/css/plugins/nouislider.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/icomoon.css">
-    <link rel="stylesheet" href="assets/css/vendor/spacing.css">
-    <link rel="stylesheet" href="assets/css/plugins/apexcharts.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/fontawesome-pro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor/spacing.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/apexcharts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
+
 <body>
+    <!-- Preloader Start -->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="bd-preloader-content">
+                    <div class="bd-preloader-logo">
+                        <div class="bd-preloader-circle">
+                            <svg width="190" height="190" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle stroke="#F5F5F5" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                                </circle>
+                                <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round">
+                                </circle>
+                            </svg>
+                        </div>
+                        <img src="{% static 'images/logo/preloader-icon.png' %}" alt="">
+                    </div>
+                    <p class="bd-preloader-subtitle">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
     <!-- Include Header -->
     {% include 'inc/header.html' %}
     
@@ -30,8 +55,26 @@
         <!-- Content will be injected here -->
         {% endblock %}
     </main>
-    
+
     <!-- Include Footer -->
     {% include 'inc/footer.html' %}
+
+    <!-- JS here -->
+    <script src="{% static 'js/vendor/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/plugins/swiper.min.js' %}"></script>
+    <script src="{% static 'js/plugins/wow.js' %}"></script>
+    <script src="{% static 'js/vendor/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/vendor/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/plugins/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/vendor/ajax-form.js' %}"></script>
+    <script src="{% static 'js/plugins/easypie.js' %}"></script>
+    <script src="{% static 'js/vendor/purecounter.js' %}"></script>
+    <script src="{% static 'js/plugins/nouislider.min.js' %}"></script>
+    <script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/plugins/typed.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
