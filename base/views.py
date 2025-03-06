@@ -10,3 +10,10 @@ def services(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
+
+## AUthentication views
+
+def login(request):
+    return render(request, 'pages/auth/login.html')
+def register(request):
+    return render(request, 'pages/auth/register.html')

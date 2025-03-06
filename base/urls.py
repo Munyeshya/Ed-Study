@@ -10,4 +10,7 @@ urlpatterns = [
     path('about', about, name="about"),
     path('services', services, name="services"),
     path('contact', contact, name="contact"),
+    ##Authentication urls
+    path('login', login, name="login"),
+    path('register', register, name="register"),
 ]
