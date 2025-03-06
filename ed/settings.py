@@ -72,7 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ed.wsgi.application'
-
+AUTH_USER_MODEL = 'base.AdminUser'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

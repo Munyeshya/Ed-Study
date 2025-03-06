@@ -1,6 +1,27 @@
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
- from django.contrib.auth.models import AbstractUser
-class Student(models.Model):
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
+class StudentManager(BaseUserManager):
+    def create_user(self, full_name, contact_info, faculty_of_interest, password=None):
+        if not full_name or not contact_info or not faculty_of_interest:
+            raise ValueError("Students must provide required information")
+        
+        student = self.model(
+            full_name=full_name,
+            contact_info=contact_info,
+            faculty_of_interest=faculty_of_interest,
+        )
+        
+        if password:
+            student.set_password(password)
+        else:
+            student.set_password(self.make_random_password())  # Set a random password if none provided
+        
+        student.save(using=self._db)
+        return student
+
+class Student(AbstractBaseUser, PermissionsMixin):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('approved', 'Approved'),
@@ -8,12 +29,19 @@ class Student(models.Model):
     ]
 
     full_name = models.CharField(max_length=255)
-    contact_info = models.CharField(max_length=255)
+    contact_info = models.CharField(max_length=255, unique=True)
     faculty_of_interest = models.CharField(max_length=255)
     secondary_diploma = models.FileField(upload_to='documents/diplomas/')
     passport = models.FileField(upload_to='documents/passports/')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    password = models.CharField(max_length=128, default="")  # Make password field non-nullable
+
+    USERNAME_FIELD = 'contact_info'
+    REQUIRED_FIELDS = ['full_name', 'faculty_of_interest']
+
+    objects = StudentManager()
 
     def __str__(self):
         return self.full_name
@@ -54,8 +82,24 @@ class Notification(models.Model):
  
 
 
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db import models
+
 class AdminUser(AbstractUser):
     role = models.CharField(max_length=50, default='admin')
 
+    groups = models.ManyToManyField(
+        Group,
+        related_name="adminuser_groups",  # Avoid conflicts
+        blank=True
+    )
+    
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name="adminuser_permissions",  # Avoid conflicts
+        blank=True
+    )
+
     def __str__(self):
         return self.username
+
