@@ -18,3 +18,11 @@ class Student(models.Model):
     def __str__(self):
         return self.full_name
 
+class Document(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='documents')
+    language_school_letter = models.FileField(upload_to='documents/language_school_letters/', null=True, blank=True)
+    responsibility_letter = models.FileField(upload_to='documents/responsibility_letters/', null=True, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Documents for {self.student.full_name}"
