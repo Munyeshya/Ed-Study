@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div class="container pt-140 pb-170">
+    <div class="container pt-10 pb-170">
         <div class="row">
             <div class="col-lg-5 mx-auto">
                 <div class="border rounded-3 px-md-5 px-3 ptb-50">
@@ -15,17 +15,21 @@
                             <form method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    {{ form.email }}
+                                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
                                 </div>
                                 <div class="form-group">
-                                    {{ form.password }}
+                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                                 </div>
                                 <div class="form-group">
                                     <div class="box-remember-forgot">
                                         <div class="remeber-me">
-                                            <label class="text-xs-medium neutral-500"> <input class="cb-remember" type="checkbox">Remember me </label>
+                                            <label class="text-xs-medium neutral-500">
+                                                <input class="cb-remember" type="checkbox"> Remember me
+                                            </label>
                                         </div>
-                                        <div class="forgotpass"><a class="text-xs-medium neutral-500" href="#">Forgot password?</a></div>
+                                        <div class="forgotpass">
+                                            <a class="text-xs-medium neutral-500" href="#">Forgot password?</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-30">
@@ -36,18 +40,7 @@
                                     </button>
                                 </div>
                                 <p class="text-md-medium neutral-500 text-center">Or connect with your social account</p>
-                                <div class="box-button-logins">
-                                    <a class="btn btn-login btn-google mr-10" href="#">
-                                        <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/google.svg" alt="Carento" />
-                                        <span class="text-sm-bold">Sign up with Google</span>
-                                    </a>
-                                    <a class="btn btn-login mr-10" href="#">
-                                        <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/facebook.svg" alt="Carento" />
-                                    </a>
-                                    <a class="btn btn-login" href="#">
-                                        <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/apple.svg" alt="Carento" />
-                                    </a>
-                                </div>
+                               
                                 <p class="text-sm-medium neutral-500 text-center mt-70">
                                     Don’t have an account? 
                                     <a class="neutral-1000" href="{% url 'base:register' %}">

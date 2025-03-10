@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div class="container pt-140 pb-170">
+    <div class="container pt-10 pb-170">
         <div class="row">
             <div class="col-lg-5 mx-auto">
                 <div class="register-content border rounded-3 px-md-5 px-3 ptb-50">
@@ -14,23 +14,24 @@
                         <form method="POST">
                             {% csrf_token %}
                             <div class="form-group">
-                                {{ form.name }}
+                                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
                             </div>
                             <div class="form-group">
-                                {{ form.email }}
+                                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
                             </div>
                             <div class="form-group">
-                                {{ form.phone_number }}
+                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" required>
                             </div>
                             <div class="form-group">
-                                {{ form.password }}
-                            </div>
-                            <div class="form-group">
-                                {{ form.confirm_password }}
+                                <input type="password" name="password" class="form-control" placeholder="Password" required>
                             </div>
                             <div class="form-group my-3">
                                 <label class="d-block neutral-500">Select Role:</label>
-                                {{ form.role }}
+                                <select name="role" class="form-control" required>
+                                    <option value="" disabled selected>Select Role</option>
+                                    <option value="student">Student</option>
+                                    <option value="admin">Admin</option>
+                                </select>
                             </div>
                             <div class="form-group mb-30">
                                 <button class="btn btn-primary w-100" type="submit">Sign up

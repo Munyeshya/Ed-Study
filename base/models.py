@@ -1,27 +1,39 @@
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser,AbstractBaseUser, Group, Permission, BaseUserManager, PermissionsMixin
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class StudentManager(BaseUserManager):
-    def create_user(self, full_name, contact_info, faculty_of_interest, password=None):
-        if not full_name or not contact_info or not faculty_of_interest:
-            raise ValueError("Students must provide required information")
+    def create_user(self, email, full_name, faculty_of_interest, password=None):
+        if not email:
+            raise ValueError("The Email field must be set")
         
-        student = self.model(
-            full_name=full_name,
-            contact_info=contact_info,
-            faculty_of_interest=faculty_of_interest,
-        )
-        
-        if password:
-            student.set_password(password)
-        else:
-            student.set_password(self.make_random_password())  # Set a random password if none provided
-        
+        email = self.normalize_email(email)
+        student = self.model(email=email, full_name=full_name, faculty_of_interest=faculty_of_interest)
+        student.set_password(password)
         student.save(using=self._db)
         return student
 
 class Student(AbstractBaseUser, PermissionsMixin):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
+    email = models.EmailField(unique=True)
+    full_name = models.CharField(max_length=255)
+    faculty_of_interest = models.CharField(max_length=255)
+    secondary_diploma = models.FileField(upload_to='documents/diplomas/')
+    passport = models.FileField(upload_to='documents/passports/')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = 'email'  # Use email as the login field
+    REQUIRED_FIELDS = ['full_name', 'faculty_of_interest']
+
+    objects = StudentManager()
+
+    def __str__(self):
+        return self.email
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('approved', 'Approved'),
@@ -82,24 +94,47 @@ class Notification(models.Model):
  
 
 
-from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.db import models
+
+
+class AdminUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError("The Email field must be set")
+        
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        return self.create_user(email, password, **extra_fields)
 
 class AdminUser(AbstractUser):
+    username = None  # Remove username field
+    email = models.EmailField(unique=True)  # Use email instead of username
     role = models.CharField(max_length=50, default='admin')
 
     groups = models.ManyToManyField(
         Group,
-        related_name="adminuser_groups",  # Avoid conflicts
+        related_name="adminuser_groups",
         blank=True
     )
     
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name="adminuser_permissions",  # Avoid conflicts
+        related_name="adminuser_permissions",
         blank=True
     )
 
+    USERNAME_FIELD = 'email'  # Use email as the login field
+    REQUIRED_FIELDS = []  # Remove username requirement
+
+    objects = AdminUserManager()
+
     def __str__(self):
-        return self.username
+        return self.email
 
