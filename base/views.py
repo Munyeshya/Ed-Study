@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import StudentRegistrationForm
 from .models import *
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.contrib import messages
 
 
 def home(request):
@@ -21,8 +22,30 @@ def contact(request):
 
 ## AUthentication views
 
-def login(request):
+def login_view(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        # Check if the email belongs to an AdminUser
+        admin_user = authenticate(request, email=email, password=password)
+        if admin_user is not None and isinstance(admin_user, AdminUser):
+            login(request, admin_user)
+            return redirect('/admin/')  # Redirect Admins to Django Admin Panel
+
+        # Check if the email belongs to a Student
+        try:
+            student = Student.objects.get(email=email)
+            if student.check_password(password):
+                login(request, student)
+                return redirect('base:student_dashboard')  # Redirect students to their dashboard
+            else:
+                messages.error(request, "Invalid email or password.")
+        except Student.DoesNotExist:
+            messages.error(request, "Invalid email or password.")
+
     return render(request, 'pages/auth/login.html')
+
 def register(request):
     if request.method == "POST":
         form = StudentRegistrationForm(request.POST, request.FILES)
