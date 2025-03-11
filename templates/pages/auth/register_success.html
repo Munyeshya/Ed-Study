@@ -1,0 +1,9 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+    <div class="container pt-10 pb-170 text-center">
+        <h2>Registration Successful!</h2>
+        <p>Your application has been submitted. You will receive an email once approved.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Go to Home</a>
+    </div>
+{% endblock content %}

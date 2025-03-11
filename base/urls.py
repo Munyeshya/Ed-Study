@@ -12,5 +12,6 @@ urlpatterns = [
     path('contact', contact, name="contact"),
     ##Authentication urls
     path('login', login, name="login"),
-    path('register', register, name="register"),
+    path('register/', register, name='register'),
+    path('register-success/', register_success, name='register_success'),
 ]

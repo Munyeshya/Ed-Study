@@ -1,13 +1,14 @@
 from django.contrib.auth.models import AbstractUser,AbstractBaseUser, Group, Permission, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 class StudentManager(BaseUserManager):
-    def create_user(self, email, full_name, faculty_of_interest, password=None):
+    def create_user(self, email, full_name, contact_info, faculty_of_interest, password=None):
         if not email:
             raise ValueError("The Email field must be set")
         
         email = self.normalize_email(email)
-        student = self.model(email=email, full_name=full_name, faculty_of_interest=faculty_of_interest)
+        student = self.model(email=email, full_name=full_name, contact_info=contact_info, faculty_of_interest=faculty_of_interest)
         student.set_password(password)
         student.save(using=self._db)
         return student
@@ -21,42 +22,27 @@ class Student(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
+    contact_info = models.CharField(max_length=255, unique=True)  # Added contact_info field
     faculty_of_interest = models.CharField(max_length=255)
-    secondary_diploma = models.FileField(upload_to='documents/diplomas/')
-    passport = models.FileField(upload_to='documents/passports/')
+    secondary_diploma = models.FileField(
+        upload_to='documents/diplomas/',
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])]
+    )
+    passport = models.FileField(
+        upload_to='documents/passports/',
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])]
+    )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
+    password = models.CharField(max_length=128, default="")
 
     USERNAME_FIELD = 'email'  # Use email as the login field
-    REQUIRED_FIELDS = ['full_name', 'faculty_of_interest']
+    REQUIRED_FIELDS = ['full_name', 'contact_info', 'faculty_of_interest']
 
     objects = StudentManager()
 
     def __str__(self):
         return self.email
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
-    ]
-
-    full_name = models.CharField(max_length=255)
-    contact_info = models.CharField(max_length=255, unique=True)
-    faculty_of_interest = models.CharField(max_length=255)
-    secondary_diploma = models.FileField(upload_to='documents/diplomas/')
-    passport = models.FileField(upload_to='documents/passports/')
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    password = models.CharField(max_length=128, default="")  # Make password field non-nullable
-
-    USERNAME_FIELD = 'contact_info'
-    REQUIRED_FIELDS = ['full_name', 'faculty_of_interest']
-
-    objects = StudentManager()
-
-    def __str__(self):
-        return self.full_name
 
 class Document(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='documents')

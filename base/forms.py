@@ -1,23 +1,20 @@
 from django import forms
-from .models import Student, AdminUser
+from .models import Student
 
 class StudentRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, required=True)
+    password = forms.CharField(widget=forms.PasswordInput, required=True, label="Password")
+    repeat_password = forms.CharField(widget=forms.PasswordInput, required=True, label="Repeat Password")
 
     class Meta:
         model = Student
         fields = ['full_name', 'email', 'faculty_of_interest', 'secondary_diploma', 'passport', 'password']
 
-class AdminRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, required=True)
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        repeat_password = cleaned_data.get("repeat_password")
 
-    class Meta:
-        model = AdminUser
-        fields = ['email', 'password']
+        if password and repeat_password and password != repeat_password:
+            raise forms.ValidationError("Passwords do not match.")
 
-    def save(self, commit=True):
-        admin = super().save(commit=False)
-        admin.set_password(self.cleaned_data['password'])
-        if commit:
-            admin.save()
-        return admin
+        return cleaned_data

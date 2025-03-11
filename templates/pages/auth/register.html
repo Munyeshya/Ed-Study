@@ -1,7 +1,6 @@
 {% extends 'layouts/app.html' %}
 
 {% block content %}
-
     <div class="container pt-10 pb-170">
         <div class="row">
             <div class="col-lg-5 mx-auto">
@@ -11,59 +10,14 @@
                         <h4 class="neutral-1000">Create an Account</h4>
                     </div>
                     <div class="form-login mt-30">
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" name="password" class="form-control" placeholder="Password" required>
-                            </div>
-                            <div class="form-group my-3">
-                                <label class="d-block neutral-500">Select Role:</label>
-                                <select name="role" class="form-control" required>
-                                    <option value="" disabled selected>Select Role</option>
-                                    <option value="student">Student</option>
-                                    <option value="admin">Admin</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-30">
-                                <button class="btn btn-primary w-100" type="submit">Sign up
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="text-md-medium neutral-500 text-center">Or connect with your social account</p>
-                            <div class="box-button-logins">
-                                <a class="btn btn-login btn-google mr-10" href="#">
-                                    <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/google.svg" alt="Carento" />
-                                    <span class="text-sm-bold">Sign up with Google</span>
-                                </a>
-                                <a class="btn btn-login mr-10" href="#">
-                                    <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/facebook.svg" alt="Carento" />
-                                </a>
-                                <a class="btn btn-login" href="#">
-                                    <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/apple.svg" alt="Carento" />
-                                </a>
-                            </div>
-                            <p class="text-sm-medium neutral-500 text-center mt-70">
-                                Already have an account? 
-                                <a class="neutral-1000" href="{% url 'base:login' %}">
-                                    Login Here !
-                                </a>
-                            </p>
+                            {{ form.as_p }}
+                            <button class="btn btn-primary w-100" type="submit">Sign up</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock content %}

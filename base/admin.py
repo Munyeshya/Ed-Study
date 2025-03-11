@@ -3,9 +3,9 @@ from .models import Student, Document, Payment, Notification, AdminUser
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'contact_info', 'faculty_of_interest', 'status', 'created_at')
+    list_display = ('full_name', 'email', 'contact_info', 'faculty_of_interest', 'status', 'created_at')  # Added 'contact_info'
     list_filter = ('status', 'faculty_of_interest')
-    search_fields = ('full_name', 'contact_info')
+    search_fields = ('full_name', 'email', 'contact_info')
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
