@@ -25,11 +25,12 @@ def register(request):
 
         if form.is_valid():
             student = form.save(commit=False)
+            student.contact_info = form.cleaned_data['contact_info']  # Ensure contact info is saved
             student.set_password(form.cleaned_data['password'])  # Hash password
             student.status = 'pending'  # Ensure student is pending approval
             student.save()
 
-            return redirect('register_success')  # Redirect to success page
+            return redirect('base:register_success')  # Redirect to success page
 
     else:
         form = StudentRegistrationForm()  # Load empty form
