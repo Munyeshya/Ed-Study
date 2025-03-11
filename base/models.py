@@ -22,7 +22,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
-    contact_info = models.CharField(max_length=255, unique=True)  # Added contact_info field
+    contact_info = models.CharField(max_length=255, unique=True)
     faculty_of_interest = models.CharField(max_length=255)
     secondary_diploma = models.FileField(
         upload_to='documents/diplomas/',
