@@ -10,9 +10,11 @@ urlpatterns = [
     path('about', about, name="about"),
     path('services', services, name="services"),
     path('contact', contact, name="contact"),
-    
+    path('logout/', logout_view, name="logout"),  # Logout route
+
     ##Authentication urls
     path('login/', login_view, name="login"),
     path('register/', register, name='register'),
+     path('admin-dashboard/', admin_dashboard, name="admin_dashboard"),
     path('student-dashboard/', home, name="student_dashboard"),
 ]

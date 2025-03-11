@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import StudentRegistrationForm
 from .models import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -20,6 +21,10 @@ def services(request):
 def contact(request):
     return render(request, 'pages/contact.html')
 
+def logout_view(request):
+    logout(request)  # Log the user out
+    return redirect('base:login')  # Redirect to login page
+
 ## AUthentication views
 
 def login_view(request):
@@ -27,24 +32,31 @@ def login_view(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        # Check if the email belongs to an AdminUser
-        admin_user = authenticate(request, email=email, password=password)
-        if admin_user is not None and isinstance(admin_user, AdminUser):
-            login(request, admin_user)
-            return redirect('/admin/')  # Redirect Admins to Django Admin Panel
+        # Authenticate the user
+        user = authenticate(request, email=email, password=password)
 
-        # Check if the email belongs to a Student
-        try:
-            student = Student.objects.get(email=email)
-            if student.check_password(password):
-                login(request, student)
-                return redirect('base:student_dashboard')  # Redirect students to their dashboard
-            else:
-                messages.error(request, "Invalid email or password.")
-        except Student.DoesNotExist:
+        if user is not None:
+            login(request, user)
+
+            # Redirect Admins to Admin Dashboard
+            if isinstance(user, AdminUser):
+                return redirect('base:admin_dashboard')
+
+            # Redirect Students to Student Dashboard
+            return redirect('base:student_dashboard')
+
+        else:
             messages.error(request, "Invalid email or password.")
 
     return render(request, 'pages/auth/login.html')
+
+@login_required
+def admin_dashboard(request):
+    if not isinstance(request.user, AdminUser):
+        messages.error(request, "You are not authorized to view this page.")
+        return redirect('base:login')  # Redirect non-admins to login
+
+    return render(request, 'pages/admin/dashboard.html')
 
 def register(request):
     if request.method == "POST":
