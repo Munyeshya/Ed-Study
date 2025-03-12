@@ -30,25 +30,15 @@
                     </div>
                     <div class="card-body user-sidebar-body">
                         <ul class="dashboard-sidebar-menu">
-                            <li class="py-2"><a href="user-dashboard-home.html"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
-                            <li class="py-2"><a href="user-dashboard-bookings.html"><i class="fi fi-rr-calendar me-1"></i>My Bookings</a></li>
-                            <li class="py-2"><a href="user-dashboard-wishlist.html"><i class="fi fi-rr-heart me-1"></i>My Wishlist</a></li>
+                            <li class="py-2"><a href="{% url 'base:admin_dashboard' %}"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
+                            <li class="py-2"><a href="{% url 'base:admin_show' %}"><i class="fi fi-rr-calendar me-1"></i>My Students</a></li>
                             <li class="py-2"><a href="user-dashboard-wallet.html"><i class="fi fi-rr-money me-1"></i>My Wallet</a></li>
-                            <li class="py-2"><a href="user-dashboard-profile.html"><i class="fi fi-rr-user me-1"></i>My Profile</a></li>
-                            <li class="py-2"><a href="user-dashboard-setting.html"><i class="fi fi-rr-settings me-1"></i>Setting</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8">
-                <!--User dashboard home content-->
-                <div class="alert alert-info alert-dismissible d-flex align-items-center border-0 mb-4 fade show  wow fadeInDown mb-4">
-                    <i class="fi fi-rr-info me-2 mt-1"></i>
-                    <p class="mb-0">
-                        Grand opening promotion ends in 3 hours. Hurry up and book your car!
-                    </p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                
 
                 <!--notifications & recent bookings-->
                 <div class="row">
@@ -163,11 +153,7 @@
                                                     <td>
                                                         <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10"><i class="fi fi-rr-caret-right me-1"></i>Upcoming</span>
                                                     </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#upcoming"><i class="fi fi-rr-arrow-up-right-from-square"></i></a>
-                                                        </div>
-                                                    </td>
+                                                    
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#CR-8677</a>
@@ -191,11 +177,7 @@
                                                     <td>
                                                         <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10"><i class="fi fi-rr-caret-right me-1"></i>Pending</span>
                                                     </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#pending"><i class="fi fi-rr-arrow-up-right-from-square"></i></a>
-                                                        </div>
-                                                    </td>
+                                                    
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#CR-3243</a>
@@ -220,11 +202,7 @@
                                                     <td>
                                                         <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10"><i class="fi fi-rr-caret-right me-1"></i>Cancelled</span>
                                                     </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#cancelled"><i class="fi fi-rr-arrow-up-right-from-square"></i></a>
-                                                        </div>
-                                                    </td>
+                                                    
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#CR-5236</a>
@@ -247,11 +225,7 @@
                                                     <td>
                                                         <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10"><i class="fi fi-rr-caret-right me-1"></i>Completed</span>
                                                     </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#completed"><i class="fi fi-rr-arrow-up-right-from-square"></i></a>
-                                                        </div>
-                                                    </td>
+                                                    
                                                 </tr>
                                                 
                                             </tbody>

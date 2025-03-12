@@ -15,6 +15,8 @@ urlpatterns = [
     ##Authentication urls
     path('login/', login_view, name="login"),
     path('register/', register, name='register'),
-     path('admin-dashboard/', admin_dashboard, name="admin_dashboard"),
+    ##Admin urls
+    path('admin-dashboard/', admin_dashboard, name="admin_dashboard"),
+    path('admin-show/', admin_show, name="admin_show"),
     path('student-dashboard/', home, name="student_dashboard"),
 ]

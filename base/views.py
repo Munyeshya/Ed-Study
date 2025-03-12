@@ -25,6 +25,9 @@ def logout_view(request):
     logout(request)  # Log the user out
     return redirect('base:login')  # Redirect to login page
 
+def admin_show(request):
+    return render(request, 'pages/admin/show.html')
+
 ## AUthentication views
 
 def login_view(request):

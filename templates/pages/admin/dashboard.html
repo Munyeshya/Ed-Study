@@ -30,22 +30,15 @@
                     </div>
                     <div class="card-body user-sidebar-body">
                         <ul class="dashboard-sidebar-menu">
-                            <li class="py-2"><a href="user-dashboard-home.html"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
-                            <li class="py-2"><a href="user-dashboard-bookings.html"><i class="fi fi-rr-calendar me-1"></i>My Bookings</a></li>
+                            <li class="py-2"><a href="{% url 'base:admin_dashboard' %}"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
+                            <li class="py-2"><a href="{% url 'base:admin_show' %}"><i class="fi fi-rr-calendar me-1"></i>My Students</a></li>
                             <li class="py-2"><a href="user-dashboard-wallet.html"><i class="fi fi-rr-money me-1"></i>My Wallet</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8">
-                <!--User dashboard home content-->
-                <div class="alert alert-success alert-dismissible d-flex align-items-center border-0 mb-4 fade show  wow fadeInDown">
-                    <i class="fi fi-rr-info me-2 mt-1"></i>
-                    <p class="mb-0">
-                        Grand opening promotion ends in 3 hours. Hurry up and book your car!
-                    </p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                
 
                 <!--Couner-->
                 <div class="row">
