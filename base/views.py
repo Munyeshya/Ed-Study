@@ -8,6 +8,9 @@ from django.utils.html import strip_tags
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from datetime import date
+from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -26,7 +29,36 @@ def logout_view(request):
     return redirect('base:login')  # Redirect to login page
 
 def admin_show(request):
-    return render(request, 'pages/admin/show.html')
+    students = Student.objects.filter(status='pending')
+
+    # Calculate age in whole years
+    today = date.today()
+    for student in students:
+        if student.dob:
+            student.age = today.year - student.dob.year  # Only subtract years
+        else:
+            student.age = "N/A"  # If DOB is missing
+
+    # Add Pagination (10 students per page)
+    paginator = Paginator(students, 10)
+    page_number = request.GET.get("page")
+    students = paginator.get_page(page_number)
+
+    return render(request, 'pages/admin/show.html', {'students': students})
+
+def student_detail(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+
+    # Calculate age
+    if student.dob:
+        today = date.today()
+        student.age = today.year - student.dob.year - ((today.month, today.day) < (student.dob.month, student.dob.day))
+    else:
+        student.age = "N/A"
+
+    return render(request, 'pages/admin/student_detail.html', {'student': student})
+
+
 
 ## AUthentication views
 
@@ -57,9 +89,20 @@ def login_view(request):
 def admin_dashboard(request):
     if not isinstance(request.user, AdminUser):
         messages.error(request, "You are not authorized to view this page.")
-        return redirect('base:login')  # Redirect non-admins to login
+        return redirect('base:login')
 
-    return render(request, 'pages/admin/dashboard.html')
+    # Get student statistics
+    total_students = Student.objects.count()
+    approved_students = Student.objects.filter(status='approved').count()
+    pending_students = Student.objects.filter(status='pending').count()
+
+    context = {
+        'total_students': total_students,
+        'approved_students': approved_students,
+        'pending_students': pending_students
+    }
+
+    return render(request, 'pages/admin/dashboard.html', context)
 
 def register(request):
     if request.method == "POST":

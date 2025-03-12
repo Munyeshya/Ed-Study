@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
 <section class="box-section background-body pt-40 pb-110 dashboard">
     <div class="container">
         <div class="row">
@@ -14,15 +13,8 @@
                                 <div class="d-flex align-items-center justify-content-center py-2">
                                     <img src="assets/imgs/section-1/img-2.png" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
                                     <div>
-                                        <p class="fw-bold fs-5">Steven Jobs</p>
-                                        <span class="fs-14 text-gray-6">Since 16 Aprill 2015</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a href="user-dashboard-setting.html" class="p-1 rounded-circle align-items-center justify-content-center btn-edit">
-                                            <i class="fi fi-rr-pencil fs-7"></i>
-                                        </a>
+                                        <p class="fw-bold fs-5">Admin Dashboard</p>
+                                        <span class="fs-14 text-gray-6">Manage Students</span>
                                     </div>
                                 </div>
                             </div>
@@ -30,28 +22,26 @@
                     </div>
                     <div class="card-body user-sidebar-body">
                         <ul class="dashboard-sidebar-menu">
-                            <li class="py-2"><a href="{% url 'base:admin_dashboard' %}"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
-                            <li class="py-2"><a href="{% url 'base:admin_show' %}"><i class="fi fi-rr-calendar me-1"></i>My Students</a></li>
-                            <li class="py-2"><a href="user-dashboard-wallet.html"><i class="fi fi-rr-money me-1"></i>My Wallet</a></li>
+                            <li class="py-2"><a href="{% url 'base:admin_dashboard' %}"><i class="fi fi-rr-home me-1"></i> Dashboard</a></li>
+                            <li class="py-2"><a href="{% url 'base:admin_show' %}"><i class="fi fi-rr-user me-1"></i> Pending Students</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8">
-                
 
-                <!--Couner-->
+                <!-- Student Counters -->
                 <div class="row">
                     <div class="col-xl-4 mb-2 mb-lg-0">
                         <div class="card shadow-none">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <span class="avatar avatar-xl rounded-circle bg-primary me-3">
-                                        <i class="fi fi-rr-bookmark fs-36"></i>
+                                        <i class="fi fi-rr-users-alt fs-36"></i>
                                     </span>
                                     <div>
-                                        <h5><span class="odometer" data-count="25"></span></h5>
-                                        <p>Total Bookings</p>
+                                        <h5><span>{{ total_students }}</span></h5>
+                                        <p>All Students</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,12 +51,12 @@
                         <div class="card shadow-none">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <span class="avatar avatar-xl rounded-circle bg-danger me-3">
-                                        <i class="fi fi-rr-research-arrows-circle"></i>
+                                    <span class="avatar avatar-xl rounded-circle bg-success me-3">
+                                        <i class="fi fi-rr-check fs-36"></i>
                                     </span>
                                     <div>
-                                        <h5>$<span class="odometer" data-count="28"></span>K</h5>
-                                        <p>Total Transactions</p>
+                                        <h5><span>{{ approved_students }}</span></h5>
+                                        <p>Approved Students</p>
                                     </div>
                                 </div>
                             </div>
@@ -77,11 +67,11 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <span class="avatar avatar-xl rounded-circle bg-warning me-3">
-                                        <i class="fi fi-rr-wallet"></i>
+                                        <i class="fi fi-rr-time-past fs-36"></i>
                                     </span>
                                     <div>
-                                        <h5>$<span class="odometer" data-count="2458"></span></h5>
-                                        <p>Wallet balance</p>
+                                        <h5><span>{{ pending_students }}</span></h5>
+                                        <p>Pending Students</p>
                                     </div>
                                 </div>
                             </div>
@@ -89,31 +79,13 @@
                     </div>
                 </div>
 
-                <!--notifications & recent bookings-->
+                <!-- Other Dashboard Content -->
                 <div class="row mt-4">
-                    <!-- Booking -->
                     <div class="col-xl-12 d-flex">
                         <div class="card shadow-none flex-fill">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="neutral-1000 text-md-bold fs-5">Bookings Statistics</span>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm text-gray-6 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                            <i class="fi fi-rr-filter-list me-2"></i>Fillter
-                                        </a>
-                                        <ul class="dropdown-menu small dropdown-menu-end p-2">
-                                            <li>
-                                                <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                    <i class="ti ti-point-filled me-1"></i>All
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                    <i class="ti ti-point-filled me-1"></i>Recent
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <span class="neutral-1000 text-md-bold fs-5">Student Statistics</span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -125,10 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /Booking -->
-
                 </div>
-
 
             </div>
         </div>
