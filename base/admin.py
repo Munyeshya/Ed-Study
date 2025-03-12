@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import Student, Document, Payment, Notification, AdminUser
+from .models import Student, Document, Payment, Notification, AdminUser,Faculty
+
+@admin.register(Faculty)
+class FacultyAdmin(admin.ModelAdmin):
+    list_display = ['name']  # Display faculty names in admin panel
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'contact_info', 'faculty_of_interest', 'status', 'created_at')  # Added 'contact_info'
-    list_filter = ('status', 'faculty_of_interest')
+    list_display = ('full_name', 'email', 'contact_info', 'faculty', 'status', 'created_at')  # Changed faculty_of_interest → faculty
+    list_filter = ('status', 'faculty')  # Changed faculty_of_interest → faculty
     search_fields = ('full_name', 'email', 'contact_info')
 
 @admin.register(Document)

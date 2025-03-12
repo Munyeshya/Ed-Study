@@ -2,13 +2,19 @@ from django.contrib.auth.models import AbstractUser,AbstractBaseUser, Group, Per
 from django.db import models
 from django.core.validators import FileExtensionValidator
 
+
+class Faculty(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
 class StudentManager(BaseUserManager):
-    def create_user(self, email, full_name, contact_info, faculty_of_interest, dob, gender, password=None):
+    def create_user(self, email, full_name, contact_info, faculty, dob, gender, password=None):
         if not email:
             raise ValueError("The Email field must be set")
         
         email = self.normalize_email(email)
-        student = self.model(email=email, full_name=full_name, contact_info=contact_info, faculty_of_interest=faculty_of_interest, dob=dob, gender=gender)
+        student = self.model(email=email, full_name=full_name, contact_info=contact_info, faculty=faculty, dob=dob, gender=gender)
         student.set_password(password)
         student.save(using=self._db)
         return student
@@ -29,9 +35,9 @@ class Student(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
     contact_info = models.CharField(max_length=255, unique=True)
-    faculty_of_interest = models.CharField(max_length=255)
-    dob = models.DateField(null=True, blank=True)  # Added Date of Birth field
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='other')  # Added Gender field
+    faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True)  # Linked to Faculty model
+    dob = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='other')
     secondary_diploma = models.FileField(
         upload_to='documents/diplomas/',
         validators=[FileExtensionValidator(allowed_extensions=['pdf'])]
@@ -44,8 +50,8 @@ class Student(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     password = models.CharField(max_length=128, default="")
 
-    USERNAME_FIELD = 'email'  # Use email as the login field
-    REQUIRED_FIELDS = ['full_name', 'contact_info', 'faculty_of_interest', 'dob', 'gender']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['full_name', 'contact_info', 'faculty', 'dob', 'gender']
 
     objects = StudentManager()
 
