@@ -3,12 +3,12 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 
 class StudentManager(BaseUserManager):
-    def create_user(self, email, full_name, contact_info, faculty_of_interest, password=None):
+    def create_user(self, email, full_name, contact_info, faculty_of_interest, dob, gender, password=None):
         if not email:
             raise ValueError("The Email field must be set")
         
         email = self.normalize_email(email)
-        student = self.model(email=email, full_name=full_name, contact_info=contact_info, faculty_of_interest=faculty_of_interest)
+        student = self.model(email=email, full_name=full_name, contact_info=contact_info, faculty_of_interest=faculty_of_interest, dob=dob, gender=gender)
         student.set_password(password)
         student.save(using=self._db)
         return student
@@ -20,10 +20,18 @@ class Student(AbstractBaseUser, PermissionsMixin):
         ('rejected', 'Rejected'),
     ]
 
+    GENDER_CHOICES = [
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other'),
+    ]
+
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
     contact_info = models.CharField(max_length=255, unique=True)
     faculty_of_interest = models.CharField(max_length=255)
+    dob = models.DateField(null=True, blank=True)  # Added Date of Birth field
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='other')  # Added Gender field
     secondary_diploma = models.FileField(
         upload_to='documents/diplomas/',
         validators=[FileExtensionValidator(allowed_extensions=['pdf'])]
@@ -37,7 +45,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=128, default="")
 
     USERNAME_FIELD = 'email'  # Use email as the login field
-    REQUIRED_FIELDS = ['full_name', 'contact_info', 'faculty_of_interest']
+    REQUIRED_FIELDS = ['full_name', 'contact_info', 'faculty_of_interest', 'dob', 'gender']
 
     objects = StudentManager()
 
