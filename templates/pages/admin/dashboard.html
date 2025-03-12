@@ -32,7 +32,7 @@
 
                 <!-- Student Counters -->
                 <div class="row">
-                    <div class="col-xl-4 mb-2 mb-lg-0">
+                    <div class="col-xl-3 mb-2 mb-lg-0">
                         <div class="card shadow-none">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 mb-2 mb-lg-0">
+                    <div class="col-xl-3 mb-2 mb-lg-0">
                         <div class="card shadow-none">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -56,13 +56,13 @@
                                     </span>
                                     <div>
                                         <h5><span>{{ approved_students }}</span></h5>
-                                        <p>Approved Students</p>
+                                        <p>Approved </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4">
+                    <div class="col-xl-3">
                         <div class="card shadow-none">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -71,7 +71,22 @@
                                     </span>
                                     <div>
                                         <h5><span>{{ pending_students }}</span></h5>
-                                        <p>Pending Students</p>
+                                        <p>Pending </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <span class="avatar avatar-xl rounded-circle bg-danger me-3">
+                                        <i class="fi fi-rr-cross-circle fs-36"></i>
+                                    </span>
+                                    <div>
+                                        <h5><span>{{ rejected_students }}</span></h5>
+                                        <p>Rejected </p>
                                     </div>
                                 </div>
                             </div>

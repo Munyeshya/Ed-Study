@@ -95,11 +95,13 @@ def admin_dashboard(request):
     total_students = Student.objects.count()
     approved_students = Student.objects.filter(status='approved').count()
     pending_students = Student.objects.filter(status='pending').count()
+    rejected_students = Student.objects.filter(status='rejected').count()  # New count for rejected students
 
     context = {
         'total_students': total_students,
         'approved_students': approved_students,
-        'pending_students': pending_students
+        'pending_students': pending_students,
+        'rejected_students': rejected_students  # Passing to template
     }
 
     return render(request, 'pages/admin/dashboard.html', context)
