@@ -31,6 +31,30 @@
                                     <span class="badge badge-danger">Rejected</span>
                                 {% endif %}
                             </p>
+                            
+                            <!-- Documents Section -->
+                            <div class="mt-4">
+                                <h5>Documents</h5>
+                                <p><strong>Secondary Diploma:</strong> 
+                                    {% if student.secondary_diploma %}
+                                        <a href="{{ student.secondary_diploma.url }}" class="btn btn-sm btn-primary" download>
+                                            <i class="fi fi-rr-download me-1"></i> Download
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">Not Uploaded</span>
+                                    {% endif %}
+                                </p>
+                                <p><strong>Passport:</strong> 
+                                    {% if student.passport %}
+                                        <a href="{{ student.passport.url }}" class="btn btn-sm btn-primary" download>
+                                            <i class="fi fi-rr-download me-1"></i> Download
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">Not Uploaded</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+
                         </div>
                         <div class="mt-4">
                             <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
