@@ -140,4 +140,33 @@ def register(request):
 
     return render(request, 'pages/auth/register.html', {'form': form})
 
+@login_required
+def approved_students(request):
+    students = Student.objects.filter(status='approved')
+
+    # Calculate age from DOB
+    today = date.today()
+    for student in students:
+        if student.dob:
+            student.age = today.year - student.dob.year
+        else:
+            student.age = "N/A"
+
+    return render(request, 'pages/admin/approved_students.html', {'students': students})
+
+
+@login_required
+def rejected_students(request):
+    students = Student.objects.filter(status='rejected')
+
+    # Calculate age from DOB
+    today = date.today()
+    for student in students:
+        if student.dob:
+            student.age = today.year - student.dob.year
+        else:
+            student.age = "N/A"
+
+    return render(request, 'pages/admin/rejected_students.html', {'students': students})
+
 

@@ -1,0 +1,45 @@
+<div class="col-xl-3 col-lg-4">
+    <div class="card user-sidebar mb-4">
+        <div class="card-header user-sidebar-header">
+            <div class="profile-content rounded-pill">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-center py-2">
+                        <img src="assets/imgs/section-1/img-2.png" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
+                        <div>
+                            <p class="fw-bold fs-5">Admin</p>
+                            <span class="fs-14 text-gray-6">Admin Dashboard</span>
+                        </div>
+                        {% comment %} <div>
+                            <p class="fw-bold fs-5">{{ request.user.role|title }}</p>  <!-- Shows 'Admin' or 'Student' -->
+                            <span class="fs-14 text-gray-6">{{ request.user.full_name }}</span>  <!-- Displays Full Name -->
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body user-sidebar-body">
+            <ul class="dashboard-sidebar-menu">
+                <li class="py-2">
+                    <a href="{% url 'base:admin_dashboard' %}">
+                        <i class="fi fi-rr-home me-1 text-primary"></i> Dashboard
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="{% url 'base:admin_show' %}">
+                        <i class="fi fi-rr-hourglass-end me-1 text-warning"></i> Pending Students
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="{% url 'base:approved_students' %}">
+                        <i class="fi fi-rr-check me-1 text-success"></i> Approved Students
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="{% url 'base:rejected_students' %}">
+                        <i class="fi fi-rr-cross-circle me-1 text-danger"></i> Rejected Students
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
