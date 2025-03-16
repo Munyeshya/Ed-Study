@@ -5,74 +5,35 @@
 <section class="box-section background-body pt-80 pb-110 dashboard">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-4">
-                <div class="card user-sidebar mb-4">
-                    <div class="card-header user-sidebar-header">
-                        <div class="profile-content rounded-pill">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center justify-content-center py-2">
-                                    <img src="assets/imgs/section-1/img-2.png" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
-                                    <div>
-                                        <p class="fw-bold fs-5">Admin</p>
-                                        <span class="fs-14 text-gray-6">Admin Dashboard</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body user-sidebar-body">
-                        <ul class="dashboard-sidebar-menu">
-                            <li class="py-2"><a href="{% url 'base:admin_dashboard' %}"><i class="fi fi-rr-home me-1"></i> Dashboard</a></li>
-                            <li class="py-2"><a href="{% url 'base:admin_show' %}"><i class="fi fi-rr-user me-1"></i> Pending Students</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            {% include 'inc/admin_sidebar.html' %}
+
             <div class="col-xl-9 col-lg-8">
                 <div class="card shadow-none">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="neutral-1000 text-md-bold fs-5">Pending Students</span>
+                            <span class="neutral-1000 text-md-bold fs-5">Student Details</span>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table datatable table-striped">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Age</th>
-                                        <th>Faculty</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for student in students %}
-                                    <tr>
-                                        <td>{{ student.full_name }}</td>
-                                        <td>{{ student.gender|title }}</td>
-                                        <td>{{ student.age }}</td>
-                                        <td>{{ student.faculty.name }}</td>
-                                        <td>
-                                            <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10">
-                                                <i class="fi fi-rr-caret-right me-1"></i>Pending
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a href="{% url 'base:student_detail' student.id %}">
-                                                <i class="fi fi-rr-eye me-1"></i> 
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% empty %}
-                                    <tr>
-                                        <td colspan="6" class="text-center">No pending students</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                        <div class="student-info">
+                            <p><strong>Full Name:</strong> {{ student.full_name }}</p>
+                            <p><strong>Email:</strong> {{ student.email }}</p>
+                            <p><strong>Contact Info:</strong> {{ student.contact_info }}</p>
+                            <p><strong>Gender:</strong> {{ student.gender|title }}</p>
+                            <p><strong>Age:</strong> {{ student.age }}</p>
+                            <p><strong>Faculty:</strong> {{ student.faculty.name }}</p>
+                            <p><strong>Status:</strong> 
+                                {% if student.status == "approved" %}
+                                    <span class="badge badge-success">Approved</span>
+                                {% elif student.status == "pending" %}
+                                    <span class="badge badge-warning">Pending</span>
+                                {% elif student.status == "rejected" %}
+                                    <span class="badge badge-danger">Rejected</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
                         </div>
                     </div>
                 </div>

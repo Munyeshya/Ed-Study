@@ -46,13 +46,14 @@ def admin_show(request):
 
     return render(request, 'pages/admin/show.html', {'students': students})
 
+@login_required
 def student_detail(request, student_id):
     student = get_object_or_404(Student, id=student_id)
 
-    # Calculate age
+    # Calculate age if DOB is provided
     if student.dob:
         today = date.today()
-        student.age = today.year - student.dob.year - ((today.month, today.day) < (student.dob.month, student.dob.day))
+        student.age = today.year - student.dob.year
     else:
         student.age = "N/A"
 
